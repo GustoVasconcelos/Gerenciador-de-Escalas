@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="dark">
 <head>
@@ -13,12 +14,12 @@
             <span class="px-2">SIEM - Sistema Interno de Escalas do Master</span>
         </div class="d-flex justify-content-md-end py-3 align-items-center">
         <div>
-            <?php if(isset($_SESSION['logado]'])): ?>
-            <a class="btn btn-primary " href="#">Sair</a>
+            <?php if(isset($_SESSION['nomeUser'])): ?>
+            <a class="btn btn-primary " href="logout.php">Sair</a>
             <?php endif ?>
         </div>
     </header>
-    <?php if(isset($_SESSION['logado]'])): ?>
+    <?php if(isset($_SESSION['nomeUser'])): ?>
     <nav class="d-flex justify-content-center py-2 border-bottom">
         <ul class="nav nav-pills">
             <li class="nav-item">
@@ -30,9 +31,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Relatórios</a>
             </li>
+            <?php if(isset($_SESSION['adminUser'])): ?>
             <li class="nav-item">
                 <a class="nav-link" href="#">Admin</a>
             </li>
+            <?php endif ?>
         </ul>
     </nav>
     <?php endif ?>
