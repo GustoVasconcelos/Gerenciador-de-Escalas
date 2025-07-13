@@ -2,3 +2,8 @@
     width: auto;
     min-height: 50vh;
 }
+
+.mensagem-temporaria {
+    opacity: 1;
+    transition: opacity 1s ease-out;
+}

@@ -21,7 +21,7 @@ if (!empty($_POST['selectedUser']) && !empty($_POST['senhaUser'])) {
         $_SESSION['nomeUser']      = $usuario['nomeUser'];
         $_SESSION['adminUser']  = (int) $usuario['adminUser'];
 
-        header("Location: ../view/sistema.php");
+        header("Location: ../view/index.php");
         exit;
     } else {
         // Credenciais inválidas

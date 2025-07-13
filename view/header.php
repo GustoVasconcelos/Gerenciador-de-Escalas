@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+$page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+?>
 <!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="dark">
 <head>
@@ -23,17 +26,17 @@
     <nav class="d-flex justify-content-center py-2 border-bottom">
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link <?= $page == 'index.php' ? 'active':''; ?>" href="index.php">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Escalas</a>
+                <a class="nav-link <?= $page == 'escalas.php' ? 'active':''; ?>" href="#">Escalas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Relatórios</a>
+                <a class="nav-link <?= $page == 'relatorios.php' ? 'active':''; ?>" href="#">Relatórios</a>
             </li>
-            <?php if(isset($_SESSION['adminUser'])): ?>
+            <?php if($_SESSION['adminUser'] == 1 ): ?>
             <li class="nav-item">
-                <a class="nav-link" href="#">Admin</a>
+                <a class="nav-link <?= $page == 'admin.php' ? 'active':''; ?>" href="admin.php">Admin</a>
             </li>
             <?php endif ?>
         </ul>

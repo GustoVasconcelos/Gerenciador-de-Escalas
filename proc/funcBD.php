@@ -1,6 +1,6 @@
 <?php
 
-function conectarBD(){
+function conectarBD() {
 
     $host       = "localhost";
     $user       = "root";
@@ -18,7 +18,7 @@ function conectarBD(){
 
 #funcao autenticacao
 
-function realizarLogin($idUser, $senhaUser){
+function realizarLogin($idUser, $senhaUser) {
 
     $conexao = conectarBD();
     $sql = "SELECT nomeUser, adminUser FROM usuarios WHERE idUser = '$idUser' AND senhaUser = '$senhaUser'";
@@ -27,11 +27,19 @@ function realizarLogin($idUser, $senhaUser){
 
 #funcoes usuarios
 
-function listaUsuarios(){
+function listarUsuarios() {
 
     $conexao = conectarBD();
     $sql = "SELECT * FROM usuarios ORDER BY nomeUser";
     return mysqli_query($conexao, $sql);
+}
+
+function cadastrarUsuario($nomeUser, $sobrenomeUser, $emailUser, $adminUser) {
+
+    $conexao = conectarBD();
+    $sql = "INSERT INTO usuarios (nomeUser, sobrenomeUser, emailUser, senhaUser, tokenUser, adminUser)
+            VALUES ('$nomeUser','$sobrenomeUser','$emailUser','123','token','$adminUser')";
+    mysqli_query($conexao, $sql);
 }
 
 ?>
