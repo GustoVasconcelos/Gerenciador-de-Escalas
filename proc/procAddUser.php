@@ -24,14 +24,14 @@ if (!empty($_POST['nomeUser']) && !empty($_POST['sobrenomeUser']) && !empty($_PO
     $_SESSION['msg_cadastro'] = "Cadastrado com sucesso!";
     
     // Redireciona de volta a pagina de admin
-    header("Location: ../view/admin.php");
+    header("Location: ../view/ger-usuarios.php");
     exit;
 }
 
 $_SESSION['msg_cadastro'] = "Erro no cadastro!";
 
 // Redireciona de volta ao formulário de login
-header("Location: ../view/admin.php");
+header("Location: ../view/ger-usuarios.php");
 exit;
 
 ?>

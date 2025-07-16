@@ -25,7 +25,7 @@ unset($_SESSION['erro_login']);
     </form>
     <?php
     if($erro_login != ""){
-        echo '<p class="py-3 mensagem-temporaria">'. $erro_login .'</p>';
+        echo '<p class="py-2 m-3 mensagem-temporaria alert alert-danger" role="alert">'. $erro_login .'</p>';
     }
     ?>    
 </main>
