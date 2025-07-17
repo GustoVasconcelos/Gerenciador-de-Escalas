@@ -19,7 +19,8 @@ $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
         </div class="d-flex justify-content-md-end py-3 align-items-center">
         <div>
             <?php if(isset($_SESSION['nomeUser'])): ?>
-            <a class="btn btn-primary " href="logout.php">Sair</a>
+            <a class="btn btn-primary me-2" href="perfil-user.php">Perfil</a>
+            <a class="btn btn-primary" href="logout.php">Sair</a>
             <?php endif ?>
         </div>
     </header>

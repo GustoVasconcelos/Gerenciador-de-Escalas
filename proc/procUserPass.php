@@ -5,8 +5,9 @@ session_start();
 
 // Verifica se os campos das senhas nao estao vazios
 if (!empty($_POST['alterarSenhaUserID']) && !empty($_POST['altSenhaUser1']) && !empty($_POST['altSenhaUser2'])) {
-    $idUser       = $_POST['alterarSenhaUserID'];
-    $senhaUser    = $_POST['altSenhaUser1'];
+    $idUser         = $_POST['alterarSenhaUserID'];
+    $senhaUser      = $_POST['altSenhaUser1'];
+    $origem         = $_POST['origem'];
 
     // Proteção contra SQL Injection
     $conexao        = conectarBD();
@@ -14,18 +15,25 @@ if (!empty($_POST['alterarSenhaUserID']) && !empty($_POST['altSenhaUser1']) && !
 
     //chamando funcao de atualizar a senha
     alterarSenhaUsuario($idUser, $senhaUser);
-
-    $_SESSION['msg_cadastro'] = "Senha atualizada com sucesso!";
     
-    // Redireciona de volta a pagina de admin
-    header("Location: ../view/ger-usuarios.php");
+    // Redireciona de volta a pagina que fez o post
+    if ($origem == 'perfil-user')
+        header("Location: ../view/logout.php");
+    if ($origem == 'ger-user') {
+        $_SESSION['msg_cadastro'] = "Senha atualizada com sucesso!";
+        header("Location: ../view/ger-usuarios.php");
+    }
     exit;
 }
 
-$_SESSION['msg_cadastro'] = "Erro ao atualizar a senha!";
+if ($origem == 'ger-user')
+    $_SESSION['msg_cadastro'] = "Erro ao atualizar a senha!";
 
 // Redireciona de volta ao formulário de login
-header("Location: ../view/ger-usuarios.php");
+if ($origem == 'perfil-user')
+    header("Location: ../view/perfil-user.php");
+if ($origem == 'ger-user')
+    header("Location: ../view/ger-usuarios.php");
 exit;
 
 ?>

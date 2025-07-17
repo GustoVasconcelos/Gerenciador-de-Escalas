@@ -28,6 +28,34 @@ function mensagemTemporaria() {
     });
 }
 
+//usado para alterar os dados do usuario na pagina de perfil do usuario
+const alteraUserPerfilModal = document.getElementById('alteraUserPerfilModal')
+if (alteraUserPerfilModal) {
+  alteraUserPerfilModal.addEventListener('show.bs.modal', event => {
+    // Button that triggered the modal
+    const button = event.relatedTarget
+    // Extract info from data-bs-* attributes
+    const iduser = button.getAttribute('data-bs-iduser')
+    const nomeuser = button.getAttribute('data-bs-nomeuser')
+    const sobrenomeuser = button.getAttribute('data-bs-sobrenomeuser')
+    const emailuser = button.getAttribute('data-bs-emailuser')
+    const adminuser = button.getAttribute('data-bs-adminuser')
+
+    // Update the modal's content.
+    const modalTitle = alteraUserPerfilModal.querySelector('.modal-title')
+    const modalBodyInput = alteraUserPerfilModal.querySelector('.modal-body form')
+
+    modalTitle.textContent = `Alterar Informacoes - ${nomeuser}`
+    modalBodyInput.id = `form-alt-user-${iduser}`
+    document.getElementById('btAlterarUser').setAttribute(`form`, `form-alt-user-${iduser}`)
+    document.getElementById('alterarUserID').setAttribute(`value`, `${iduser}`)
+    document.getElementById('altNomeUser').setAttribute(`value`, `${nomeuser}`)
+    document.getElementById('altSobrenomeUser').setAttribute(`value`, `${sobrenomeuser}`)
+    document.getElementById('altEmailUser').setAttribute(`value`, `${emailuser}`)
+    document.getElementById('altAdminUser').setAttribute(`value`, `${adminuser}`);
+  })
+}
+
 // usado para alterar a senha do usuario na pagina de admin
 const altSenhaUserModal = document.getElementById('altSenhaUserModal')
 if (altSenhaUserModal) {

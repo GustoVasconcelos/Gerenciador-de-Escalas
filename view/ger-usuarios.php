@@ -82,6 +82,7 @@ require_once 'header.php';
                 <div class="modal-body">
                     <form method="POST" action="../proc/procUserPass.php" id="formSenha">
                         <input type="hidden" id="alterarSenhaUserID" name="alterarSenhaUserID" value="">
+                        <input type="hidden" name="origem" value="ger-user">
                         <div class="mb-3">
                             <label for="altSenhaUser1" class="col-form-label">Nova senha:</label>
                             <div class="input-group">
@@ -146,6 +147,7 @@ require_once 'header.php';
                 <div class="modal-body">
                     <form action="../proc/procUserUpd.php" method="POST" class="" id="form-alterar-user">
                         <input type="hidden" id="alterarUserID" name="alterarUserID" value="">
+                        <input type="hidden" name="origem" value="ger-user">
                         <div class="mb-3">                        
                             <label for="altNomeUser" class="col-sm-2 col-form-label">Nome</label>
                             <input type="text" class="form-control" name="altNomeUser" id="altNomeUser" placeholder="Digite o nome">

@@ -1,5 +1,5 @@
 <?php session_start() ?>
-    <footer class="d-flex justify-content-center align-items-center py-2">
+    <footer class="d-flex justify-content-center align-items-center py-2 mb-2">
         <span>SIEM - Criado por Augusto Vasconcelos</span>
     </footer>
     <script src="../assets/script.js"></script>

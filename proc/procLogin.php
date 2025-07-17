@@ -5,8 +5,8 @@ session_start();
 
 // Verifica se email e senha foram enviados
 if (!empty($_POST['selectedUser']) && !empty($_POST['senhaUser'])) {
-    $idUser = $_POST['selectedUser'];
-    $senhaUser = $_POST['senhaUser'];
+    $idUser     = $_POST['selectedUser'];
+    $senhaUser  = $_POST['senhaUser'];
 
     // Proteção contra SQL Injection
     $conexao = conectarBD();
@@ -18,8 +18,12 @@ if (!empty($_POST['selectedUser']) && !empty($_POST['senhaUser'])) {
         $usuario = $resultado->fetch_assoc();
         
         // Grava na sessão apenas os dados necessários
-        $_SESSION['nomeUser']      = $usuario['nomeUser'];
-        $_SESSION['adminUser']  = (int) $usuario['adminUser'];
+        $_SESSION['nomeUser']  = $usuario['nomeUser'];
+        $_SESSION['adminUser'] = (int) $usuario['adminUser'];
+
+        // Atualiza a quantidade de acessos do usuario
+        $acessos = (int) $usuario['acessosUser'] + 1;
+        atualizaAcessos($idUser, $acessos);
 
         header("Location: ../view/index.php");
         exit;

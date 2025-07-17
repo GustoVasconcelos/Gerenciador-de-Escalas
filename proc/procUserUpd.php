@@ -4,12 +4,16 @@ require_once '../proc/funcBD.php';
 session_start();
 
 // Verifica se os dados alterados nao estao vazios
-if (!empty($_POST['alterarUserID']) && !empty($_POST['altNomeUser']) && !empty($_POST['altSobrenomeUser']) && !empty($_POST['altEmailUser'])) {
+if (!empty($_POST['alterarUserID']) && !empty($_POST['altNomeUser']) && !empty($_POST['altSobrenomeUser']) && !empty($_POST['altEmailUser']) && !empty($_POST['origem'])) {
     $idUser         = $_POST['alterarUserID'];
     $nomeUser       = $_POST['altNomeUser'];
     $sobrenomeUser  = $_POST['altSobrenomeUser'];
     $emailUser      = $_POST['altEmailUser'];
-    $adminUser      = isset($_POST['altCheckAdm']) ? 1 : 0;
+    $origem         = $_POST['origem'];
+    if ($origem == 'perfil-user')
+        $adminUser = $_POST['altAdminUser'];
+    if ($origem == 'ger-user')
+        $adminUser      = isset($_POST['altCheckAdm']) ? 1 : 0;
 
     // Proteção contra SQL Injection
     $conexao        = conectarBD();
@@ -23,7 +27,13 @@ if (!empty($_POST['alterarUserID']) && !empty($_POST['altNomeUser']) && !empty($
     $_SESSION['msg_cadastro'] = "Cadastrado atualizado com sucesso!";
     
     // Redireciona de volta a pagina de admin
-    header("Location: ../view/ger-usuarios.php");
+    if ($origem == 'perfil-user') {
+        $_SESSION['nomeUser']  = $nomeUser;
+        $_SESSION['adminUser'] = $adminUser;
+        header("Location: ../view/perfil-user.php");
+    }
+    if ($origem == 'ger-user')
+        header("Location: ../view/ger-usuarios.php");
     exit;
 }
 
