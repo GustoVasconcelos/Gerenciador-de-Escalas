@@ -80,20 +80,37 @@ require_once 'header.php';
                     <h1 class="modal-title fs-5" id="altSenhaUserModalLabel">Alterar senha do</h1>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="#">
+                    <form method="POST" action="../proc/procUserPass.php" id="formSenha">
+                        <input type="hidden" id="alterarSenhaUserID" name="alterarSenhaUserID" value="">
                         <div class="mb-3">
                             <label for="altSenhaUser1" class="col-form-label">Nova senha:</label>
-                            <input type="password" class="form-control" name="altSenhaUser1" id="altSenhaUser1">
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="altSenhaUser1" id="altSenhaUser1" required>
+                                <button class="btn btn-outline-secondary" type="button" id="toggleSenha1">
+                                    <i class="bi bi-eye"></i> <!-- Ícone do Bootstrap Icons -->
+                                </button>
+                            </div>
+                            <div class="progress mt-2" style="height: 5px;">
+                                <div id="forcaSenha" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                            </div>
+                            <small id="feedbackForca" class="form-text"></small>
                         </div>
                         <div class="mb-3">
                             <label for="altSenhaUser2" class="col-form-label">Confirmar nova senha:</label>
-                            <input type="password" class="form-control" name="altSenhaUser2" id="altSenhaUser2">
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="altSenhaUser2" id="altSenhaUser2" required>
+                                <button class="btn btn-outline-secondary" type="button" id="toggleSenha2">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <small id="feedbackConfirmacao" class="form-text"></small>
                         </div>
+                        <div id="mensagemErro" class="alert alert-danger mt-3 d-none"></div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" form="" id="btAltSenhaUser" class="btn btn-primary">Alterar</button>
+                    <button type="submit" form="formSenha" id="btAltSenhaUser" class="btn btn-primary">Alterar</button>
                 </div>
             </div>
         </div>
@@ -108,7 +125,8 @@ require_once 'header.php';
                 </div>
                 <div class="modal-body">
                     <p>Deseja excluir o usuario selecionado?</p>
-                    <form method="POST" action="#">
+                    <form action="../proc/procUserDel.php" method="POST">
+                        <input type="hidden" id="excluiUserID" name="excluiUserID" value="">
                     </form>
                 </div>
                 <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
@@ -126,7 +144,8 @@ require_once 'header.php';
                     <h1 class="modal-title fs-5" id="alteraUserModalLabel">Alterar Usuario</h1>
                 </div>
                 <div class="modal-body">
-                    <form action="../proc/procAddUser.php" method="post" class="" id="form-alterar-user">
+                    <form action="../proc/procUserUpd.php" method="POST" class="" id="form-alterar-user">
+                        <input type="hidden" id="alterarUserID" name="alterarUserID" value="">
                         <div class="mb-3">                        
                             <label for="altNomeUser" class="col-sm-2 col-form-label">Nome</label>
                             <input type="text" class="form-control" name="altNomeUser" id="altNomeUser" placeholder="Digite o nome">
@@ -162,7 +181,7 @@ require_once 'header.php';
                     <h1 class="modal-title fs-5" id="cadastraUserModalLabel">Adicionar Usuario</h1>
                 </div>
                 <div class="modal-body">
-                    <form action="../proc/procAddUser.php" method="post" class="" id="form-add-user">
+                    <form action="../proc/procUserAdd.php" method="POST" class="" id="form-add-user">
                         <div class="mb-3">                        
                             <label for="nomeUser" class="col-sm-2 col-form-label">Nome</label>
                             <input type="text" class="form-control" name="nomeUser" id="nomeUser" placeholder="Digite o nome">
