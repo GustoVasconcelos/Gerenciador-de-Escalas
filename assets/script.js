@@ -7,6 +7,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Mostrar Senhas
     mostrarSenhas();
+
+    // Adicionar verificação para o checkbox de férias
+    const temFeriasCheckbox = document.getElementById('temFerias');
+    if (temFeriasCheckbox) {
+        temFeriasCheckbox.addEventListener('change', function() {
+            const container = document.getElementById('funcionariosFeriasContainer');
+            if (container) {
+                container.style.display = this.checked ? 'block' : 'none';
+                
+                // Opcional: tornar o campo obrigatório apenas quando visível
+                const funcionariosFerias = document.getElementById('funcionariosFerias');
+                const dtInicioFerias = document.getElementById('dtInicioFerias');
+                const dtFinalFerias = document.getElementById('dtFinalFerias');
+                if (funcionariosFerias && dtInicioFerias && dtFinalFerias) {
+                    dtInicioFerias.required = this.checked;
+                    dtFinalFerias.required = this.checked;
+                    funcionariosFerias.required = this.checked;
+                }
+            }
+        });
+    }
 });
 
 function mensagemTemporaria() {
@@ -139,61 +160,67 @@ function validarFormularioSenha() {
     const mensagemErro = document.getElementById('mensagemErro');
 
     // Validação em tempo real da força da senha
-    senhaInput.addEventListener('input', function() {
-        const senha = this.value;
-        const forca = calcularForcaSenha(senha);
+    if(senhaInput) {
+        senhaInput.addEventListener('input', function() {
+            const senha = this.value;
+            const forca = calcularForcaSenha(senha);
         
-        atualizarFeedbackForca(forca, senha);
-    });
+            atualizarFeedbackForca(forca, senha);
+        }
+    )};
 
     // Validação em tempo real da confirmação
-    confirmacaoInput.addEventListener('input', function() {
-        const senha1 = senhaInput.value;
-        const senha2 = this.value;
-        
-        if (senha1 && senha2) {
-            if (senha1 === senha2) {
-                feedbackConfirmacao.textContent = '✓ As senhas coincidem';
-                feedbackConfirmacao.className = 'form-text text-success';
+    if(confirmacaoInput) {
+        confirmacaoInput.addEventListener('input', function() {
+            const senha1 = senhaInput.value;
+            const senha2 = this.value;
+            
+            if (senha1 && senha2) {
+                if (senha1 === senha2) {
+                    feedbackConfirmacao.textContent = '✓ As senhas coincidem';
+                    feedbackConfirmacao.className = 'form-text text-success';
+                } else {
+                    feedbackConfirmacao.textContent = '✗ As senhas não coincidem';
+                    feedbackConfirmacao.className = 'form-text text-danger';
+                }
             } else {
-                feedbackConfirmacao.textContent = '✗ As senhas não coincidem';
-                feedbackConfirmacao.className = 'form-text text-danger';
+                feedbackConfirmacao.textContent = '';
             }
-        } else {
-            feedbackConfirmacao.textContent = '';
         }
-    });
+    )};
 
     // Validação no submit
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const senha1 = senhaInput.value;
-        const senha2 = confirmacaoInput.value;
-        const forca = calcularForcaSenha(senha1);
-        
-        // Limpa mensagens anteriores
-        mensagemErro.classList.add('d-none');
-        
-        // Validações
-        if (!senha1 || !senha2) {
-            mostrarErro('Por favor, preencha ambos os campos de senha.');
-            return;
+    if(form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const senha1 = senhaInput.value;
+            const senha2 = confirmacaoInput.value;
+            const forca = calcularForcaSenha(senha1);
+            
+            // Limpa mensagens anteriores
+            mensagemErro.classList.add('d-none');
+            
+            // Validações
+            if (!senha1 || !senha2) {
+                mostrarErro('Por favor, preencha ambos os campos de senha.');
+                return;
+            }
+            
+            if (senha1 !== senha2) {
+                mostrarErro('As senhas não coincidem. Por favor, digite senhas iguais nos dois campos.');
+                return;
+            }
+            
+            if (forca.nivel < 3) { // Pelo menos força média
+                mostrarErro('A senha é muito fraca. ' + forca.mensagem);
+                return;
+            }
+            
+            // Se tudo estiver OK, envia o formulário
+            this.submit();
         }
-        
-        if (senha1 !== senha2) {
-            mostrarErro('As senhas não coincidem. Por favor, digite senhas iguais nos dois campos.');
-            return;
-        }
-        
-        if (forca.nivel < 3) { // Pelo menos força média
-            mostrarErro('A senha é muito fraca. ' + forca.mensagem);
-            return;
-        }
-        
-        // Se tudo estiver OK, envia o formulário
-        this.submit();
-    });
+    )};
 
     // Funções auxiliares
     function calcularForcaSenha(senha) {
@@ -282,29 +309,35 @@ function validarFormularioSenha() {
 
 function mostrarSenhas() {
     // Alternar visibilidade individual para cada campo
-    document.getElementById('toggleSenha1').addEventListener('click', function() {
+    const toogleSenha1 = document.getElementById('toggleSenha1');
+    if(toogleSenha1) {
+        toogleSenha1.addEventListener('click', function() {
         const senhaInput = document.getElementById('altSenhaUser1');
         const icon = this.querySelector('i');
         
-        if (senhaInput.type === 'password') {
-            senhaInput.type = 'text';
-            icon.classList.replace('bi-eye', 'bi-eye-slash');
-        } else {
-            senhaInput.type = 'password';
-            icon.classList.replace('bi-eye-slash', 'bi-eye');
-        }
-    });
+            if (senhaInput.type === 'password') {
+                senhaInput.type = 'text';
+                icon.classList.replace('bi-eye', 'bi-eye-slash');
+            } else {
+                senhaInput.type = 'password';
+                icon.classList.replace('bi-eye-slash', 'bi-eye');
+            }
+        })
+    };
     
-    document.getElementById('toggleSenha2').addEventListener('click', function() {
+    const toogleSenha2 = document.getElementById('toggleSenha2')
+    if(toogleSenha2) {
+        toogleSenha2.addEventListener('click', function() {
         const senhaInput = document.getElementById('altSenhaUser2');
         const icon = this.querySelector('i');
         
-        if (senhaInput.type === 'password') {
-            senhaInput.type = 'text';
-            icon.classList.replace('bi-eye', 'bi-eye-slash');
-        } else {
-            senhaInput.type = 'password';
-            icon.classList.replace('bi-eye-slash', 'bi-eye');
-        }
-    });
+            if (senhaInput.type === 'password') {
+                senhaInput.type = 'text';
+                icon.classList.replace('bi-eye', 'bi-eye-slash');
+            } else {
+                senhaInput.type = 'password';
+                icon.classList.replace('bi-eye-slash', 'bi-eye');
+            }
+        })
+    };
 };

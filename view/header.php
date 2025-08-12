@@ -6,7 +6,7 @@ $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
 <html lang="pt-BR" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <title>Sistema Interno de Escalas do Master</title>
+    <title>Sistema Interno do Master</title>
     <link rel="stylesheet" href="../assets/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
@@ -15,7 +15,7 @@ $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
     <header class="d-flex justify-content-md-between px-5 align-items-center border-bottom">
         <div class="d-flex justify-content-center py-3 align-items-center">
             <img src="../assets/img/logotipo-band.webp" alt="">
-            <span class="px-2">SIEM - Sistema Interno de Escalas do Master</span>
+            <span class="px-2">SIM - Sistema Interno do Master</span>
         </div class="d-flex justify-content-md-end py-3 align-items-center">
         <div>
             <?php if(isset($_SESSION['nomeUser'])): ?>
@@ -31,7 +31,7 @@ $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
                 <a class="nav-link <?= $page == 'index.php' ? 'active':''; ?>" href="index.php">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?= $page == 'escalas.php' ? 'active':''; ?>" href="#">Escalas</a>
+                <a class="nav-link <?= $page == 'escalas.php' ? 'active':''; ?>" href="escalas.php">Escalas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link <?= $page == 'relatorios.php' ? 'active':''; ?>" href="#">Relatórios</a>

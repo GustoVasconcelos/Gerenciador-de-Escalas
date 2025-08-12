@@ -32,17 +32,17 @@ require_once 'header.php';
             <!-- Campos do perfil -->
             <div class="profile-fields">
                 <div class="profile-field">
-                    <label for="nome" class="form-label">Nome</label>
+                    <label for="profNomeUser" class="form-label">Nome</label>
                     <input type="text" class="form-control" id="profNomeUser" value="<?php echo $usuario['nomeUser']; ?>" readonly>
                 </div>
                 
                 <div class="profile-field">
-                    <label for="sobrenome" class="form-label">Sobrenome</label>
+                    <label for="profSobrenomeUser" class="form-label">Sobrenome</label>
                     <input type="text" class="form-control" id="profSobrenomeUser" value="<?php echo $usuario['sobrenomeUser']; ?>" readonly>
                 </div>
                 
                 <div class="profile-field">
-                    <label for="email" class="form-label">Email</label>
+                    <label for="profEmail" class="form-label">Email</label>
                     <input type="email" class="form-control" id="profEmail" value="<?php echo $usuario['emailUser']; ?>" readonly>
                 </div>
             </div>
